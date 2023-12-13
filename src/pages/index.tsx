@@ -1,25 +1,49 @@
+import Botao from "../components/Botao";
+import Formulario from "../components/Formulario";
 import Layout from "../components/Layout";
 import Tabela from "../components/Tabela";
-import Cliente from "../core/Cliente";
+import useClientes from "../hooks/useClientes";
+
 
 
 export default function Home() {
 
-  const clientes = [
-    new Cliente('Vini', 23, '1'),
-    new Cliente('Ana', 50, '2'),
-    new Cliente('MI', 20, '3'),
-    new Cliente('Victor', 44, '4')
-  ]
+  const { 
+    cliente, 
+    clientes,
+    tabelaVisivel,
+    exibirTabela,
+    selecionarCliente, 
+    excluirCliente, 
+    salvarCliente, 
+    novoCliente,
+  } = useClientes()
 
   return (
     <div className={`flex justify-center items-center h-screen bg-slate-900 text-white`}>
 
       <Layout titulo="Cadastro simples">
+        {tabelaVisivel ? (
+          <>
+            <div className={` flex justify-end`}>
+              <Botao onClick={novoCliente}>
+                Novo cliente
+              </Botao>
+            </div>
 
-        <Tabela clientes={clientes}>
+            <Tabela clientes={clientes} 
+              clienteSelecionado={selecionarCliente}
+              clienteExcluido={excluirCliente}
+            />
+          </>
+        ) : (
+          <Formulario 
+            cliente={cliente} 
+            clienteMudou={salvarCliente}
+            cancelado={exibirTabela}
+          />
+        )}
 
-        </Tabela>
       </Layout>
     </div>
   )

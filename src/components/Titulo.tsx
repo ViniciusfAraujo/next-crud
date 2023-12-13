@@ -4,7 +4,7 @@ export default function Titulo(props){
             <h1 className={`px-5 py-2 text-2xl`}>
                 {props.children}
             </h1>
-            <hr className={`border-2 border-sky-600`} />
+            <hr className={`border-2 border-stone-700 `} />
             <p></p>
         </div>
     )
